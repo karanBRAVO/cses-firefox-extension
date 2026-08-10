@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "CSES Companion",
+  "version": "0.1.0",
+  "description": "A Firefox companion extension for CSES problem solving.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://cses.fi/*"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://cses.fi/problemset/task/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "CSES Companion"
+  }
+}
