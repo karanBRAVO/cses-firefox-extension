@@ -1,3 +1,6 @@
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 interface CompanionPanelProps {
   problemId: string;
   problemTitle: string;
@@ -10,79 +13,23 @@ export default function CompanionPanel({
   onClose,
 }: CompanionPanelProps) {
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: "20px",
-        right: "20px",
-        width: "420px",
-        height: "500px",
-        zIndex: 999999,
-        background: "#1e1e1e",
-        color: "#ffffff",
-        borderRadius: "12px",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.4)",
-        overflow: "hidden",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      {/* Header */}
-      <div
-        style={{
-          height: "50px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 16px",
-          borderBottom: "1px solid #333",
-          fontWeight: "600",
-        }}
-      >
-        <span>CSES Companion</span>
+    <div className="fixed top-5 right-5 z-999999 h-125 w-105 overflow-hidden rounded-xl bg-[#1e1e1e] text-white shadow-2xl">
+      <div className="flex h-13 items-center justify-between border-b border-[#333] px-4">
+        <div>
+          <div className="text-sm font-semibold">CSES Companion</div>
 
-        <button
-          onClick={onClose}
-          style={{
-            border: "none",
-            background: "transparent",
-            color: "#aaa",
-            fontSize: "20px",
-            cursor: "pointer",
-          }}
-        >
-          ×
-        </button>
+          <div className="text-[11px] text-[#888]">#{problemId}</div>
+        </div>
+
+        <Button variant="ghost" size="icon" onClick={onClose}>
+          <X />
+        </Button>
       </div>
 
-      {/* Content */}
-      <div style={{ padding: "20px" }}>
-        <h2
-          style={{
-            margin: "0 0 8px 0",
-            fontSize: "20px",
-          }}
-        >
-          {problemTitle}
-        </h2>
+      <div className="p-5">
+        <h2 className="mb-2 text-xl font-semibold">{problemTitle}</h2>
 
-        <p
-          style={{
-            margin: "0 0 30px 0",
-            color: "#999",
-          }}
-        >
-          Problem #{problemId}
-        </p>
-
-        <div
-          style={{
-            padding: "30px",
-            borderRadius: "8px",
-            background: "#252526",
-            textAlign: "center",
-            color: "#888",
-          }}
-        >
+        <div className="mt-7 rounded-lg bg-[#252526] p-8 text-center text-[#888]">
           Editor coming soon...
         </div>
       </div>

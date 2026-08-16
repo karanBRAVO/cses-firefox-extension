@@ -1,16 +1,25 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+
+const DIRNAME = import.meta.dirname;
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
+
+  resolve: {
+    alias: {
+      "@": path.resolve(DIRNAME, "./src"),
+    },
+  },
 
   build: {
     rollupOptions: {
       input: {
-        background: resolve(__dirname, "src/background/background.ts"),
-        content: resolve(__dirname, "src/content/content.ts"),
+        background: path.resolve(DIRNAME, "src/background/background.ts"),
+        content: path.resolve(DIRNAME, "src/content/content.ts"),
       },
 
       output: {
