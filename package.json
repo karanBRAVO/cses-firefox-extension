@@ -1,14 +1,22 @@
 {
-  "name": "cses-firefox",
+  "name": "cses-forge",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "A Firefox extension that turns CSES problem pages into a full in-page IDE: problem statement, Monaco editor, test runner, and one-click submit.",
+  "author": {
+    "name": "Karan Yadav",
+    "url": "https://github.com/karanBRAVO"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/karanBRAVO",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --config vite.config.content.ts && vite build --config vite.config.background.ts",
     "lint": "oxlint",
     "preview": "vite preview",
-    "start:firefox": "web-ext run --source-dir ./dist/"
+    "start:firefox": "web-ext run --source-dir ./dist/",
+    "generate:icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -19,7 +27,6 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
     "monaco-editor": "^0.56.0",
-    "oxlint-tsgolint": "^7.0.2001",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-resizable-panels": "^4.12.2",
@@ -34,6 +41,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "oxlint": "^1.75.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "sharp": "^0.35.3",
     "typescript": "~6.0.2",
     "vite": "^8.2.0",
     "web-ext": "^10.6.0"

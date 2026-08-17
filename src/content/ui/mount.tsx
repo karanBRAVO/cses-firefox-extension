@@ -1,12 +1,17 @@
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
+import type { ScrapedProblem } from "../../types/problem";
 import CompanionPanel from "./CompanionPanel";
 import cssText from "./styles.css?inline";
 
 let root: Root | null = null;
 let host: HTMLDivElement | null = null;
 
-export function openCompanion(problemId: string, problemTitle: string) {
+export function openCompanion(
+  problemId: string,
+  problemTitle: string,
+  scraped: ScrapedProblem | null,
+) {
   if (host) {
     return;
   }
@@ -28,6 +33,14 @@ export function openCompanion(problemId: string, problemTitle: string) {
     mode: "open",
   });
 
+  // KaTeX renders the problem's math client-side before we scrape it; the
+  // rendered spans keep their katex classes, so pull the stylesheet in here
+  // too since shadow DOM styles are isolated from the host page.
+  const katexStyle = document.createElement("link");
+  katexStyle.rel = "stylesheet";
+  katexStyle.href = "https://cses.fi/lib/katex/katex.min.css";
+  shadowRoot.appendChild(katexStyle);
+
   const style = document.createElement("style");
   style.textContent = cssText;
   shadowRoot.appendChild(style);
@@ -44,6 +57,8 @@ export function openCompanion(problemId: string, problemTitle: string) {
     <CompanionPanel
       problemId={problemId}
       problemTitle={problemTitle}
+      scraped={scraped}
+      portalContainer={container}
       onClose={closeCompanion}
     />,
   );

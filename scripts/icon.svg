@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1e1b2e"/>
+      <stop offset="1" stop-color="#0f0d1a"/>
+    </linearGradient>
+    <linearGradient id="anvil" x1="20" y1="40" x2="108" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+
+  <!-- sparks -->
+  <circle cx="90" cy="30" r="3.5" fill="#fbbf24"/>
+  <circle cx="102" cy="44" r="2.5" fill="#fb923c"/>
+  <circle cx="80" cy="22" r="2" fill="#fb923c"/>
+
+  <!-- anvil -->
+  <path d="M28 78        L28 70        C28 66 31 63 36 63        L52 63        L56 52        C57 49 60 47 63 47        L92 47        C96 47 99 50 99 54        L99 63        C99 67 96 70 92 70        L86 70        L86 78        Z" fill="url(#anvil)"/>
+  <rect x="52" y="78" width="24" height="8" rx="2" fill="url(#anvil)"/>
+  <path d="M40 86 L88 86 L82 100 L46 100 Z" fill="url(#anvil)"/>
+</svg>
