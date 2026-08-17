@@ -2,6 +2,9 @@ import { X, Play, Send, Settings } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useRef } from "react";
+
+declare const browser: any;
 
 interface CompanionPanelProps {
   problemId: string;
@@ -14,6 +17,8 @@ export default function CompanionPanel({
   problemTitle,
   onClose,
 }: CompanionPanelProps) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
   return (
     <div className="fixed inset-4 z-999999 flex flex-col overflow-hidden rounded-xl border border-border bg-white text-black shadow-2xl dark:bg-[#1e1e1e] dark:text-white">
       {/* Header */}
@@ -95,14 +100,13 @@ export default function CompanionPanel({
           </div>
 
           {/* Editor placeholder */}
-          <div className="flex flex-1 items-center justify-center bg-[#181818]">
-            <div className="text-center">
-              <div className="text-sm font-medium">Monaco Editor</div>
-
-              <div className="mt-1 text-xs text-muted-foreground">
-                Coming next
-              </div>
-            </div>
+          <div className="min-h-0 flex-1">
+            <iframe
+              ref={iframeRef}
+              src={`${browser.runtime.getURL("editor.html")}?problemId=${encodeURIComponent(problemId)}}`}
+              title="Code editor"
+              className="h-full w-full border-0"
+            />
           </div>
         </section>
       </main>

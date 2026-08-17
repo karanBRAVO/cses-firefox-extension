@@ -17,5 +17,11 @@
   ],
   "action": {
     "default_title": "CSES Companion"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["editor.html", "asset/*"],
+      "matches": ["https://cses.fi/*"]
+    }
+  ]
 }

@@ -5,7 +5,15 @@ import path from "path";
 
 const DIRNAME = import.meta.dirname;
 
-// https://vite.dev/config/
+// Builds the editor extension page (a real moz-extension:// page, so it can
+// freely use ES modules, code-splitting, and web workers for Monaco).
+// The content script and background script are built separately, as plain
+// non-module IIFE bundles — see vite.config.content.ts and
+// vite.config.background.ts. Keeping them apart stops the bundler from
+// hoisting shared chunks (e.g. React's jsx-runtime) into an `import`
+// statement, which content scripts can't execute unless declared as ES
+// modules, and Firefox's content_scripts "type": "module" support is not
+// reliable across versions.
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
@@ -18,12 +26,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        background: path.resolve(DIRNAME, "src/background/background.ts"),
-        content: path.resolve(DIRNAME, "src/content/content.ts"),
-      },
-
-      output: {
-        entryFileNames: "[name].js",
+        editor: path.resolve(DIRNAME, "editor.html"),
       },
     },
 
