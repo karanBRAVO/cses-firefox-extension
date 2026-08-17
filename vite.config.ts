@@ -28,6 +28,14 @@ export default defineConfig({
       input: {
         editor: path.resolve(DIRNAME, "editor.html"),
       },
+      output: {
+        // Inline Monaco's lazily-loaded language chunks (cpp.js, python.js,
+        // java.js) into the main bundle instead of runtime `import()`
+        // calls. AMO's validator flags dynamic `import()` with a
+        // non-literal argument as "unsafe" (it can't statically verify the
+        // path), which code-splitting otherwise triggers here.
+        codeSplitting: false,
+      },
     },
 
     outDir: "dist",

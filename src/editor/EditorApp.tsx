@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
-import * as monaco from "monaco-editor";
+// Import Monaco's lean editor core plus only the three languages this
+// editor actually supports, instead of the full `monaco-editor` package
+// (which also registers TypeScript/JSON/CSS/HTML language *services*, not
+// just syntax highlighting — those pull in multi-megabyte worker bundles,
+// like a >5MB ts.worker chunk that Firefox's AMO validator refuses to even
+// parse, none of which this editor ever uses).
+import * as monaco from "monaco-editor/editor/editor.api";
+import "monaco-editor/languages/definitions/cpp/register";
+import "monaco-editor/languages/definitions/python/register";
+import "monaco-editor/languages/definitions/java/register";
 import {
   DEFAULT_EDITOR_SETTINGS,
   type EditorLanguage,

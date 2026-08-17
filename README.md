@@ -195,11 +195,14 @@ There's no automated test suite yet; changes are verified manually by reloading 
 
 1. **Bump the version** in both `package.json` and `public/manifest.json` (they should match).
 2. **Build a clean release bundle**: `rm -rf dist && npm run build`.
-3. **Zip the `dist/` contents** (not the `dist/` folder itself — the manifest must be at the zip root):
+3. **Package it with `web-ext`** (already a dev dependency) rather than zipping by hand — manual zips made with Windows tools (Explorer's "Compress", PowerShell's `Compress-Archive`) often store `\`-separated paths, which AMO's validator rejects with `Invalid file name in archive`:
 
    ```bash
-   cd dist && zip -r ../cses-forge-v0.1.0.zip . && cd ..
+   npx web-ext lint --source-dir ./dist # (Optional but recommended) verify no errors before packaging
+   npx web-ext build --source-dir ./dist --artifacts-dir ./web-ext-artifacts --overwrite-dest
    ```
+
+   This produces `web-ext-artifacts/cses_forge-<version>.zip` with correctly `/`-separated paths, ready to upload as-is.
 
 4. **Create an AMO account** at [addons.mozilla.org](https://addons.mozilla.org) if you don't have one, and sign in to the [Developer Hub](https://addons.mozilla.org/developers/).
 5. **Submit a new version**: Developer Hub → _Submit a New Add-on_ → _On this site_ (recommended, for public listing) or _On your own_ (unlisted, self-distributed) → upload the zip.

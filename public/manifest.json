@@ -4,6 +4,14 @@
   "version": "0.1.0",
   "description": "An in-page IDE for CSES: problem statement, Monaco editor, test runner, and one-click submit.",
   "homepage_url": "https://github.com/karanBRAVO",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "cses-forge@karanbravo.dev",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
   "permissions": ["storage"],
   "host_permissions": ["https://cses.fi/*", "https://wandbox.org/*"],
   "background": {
